@@ -9,7 +9,7 @@ This is a widget for ChiliPeppr. It is based on a monolithic HTML file that
 contains CSS, Javascript, and HTML. You should edit widget.html to represent 
 your content and functionality.
 
----
+### Running / Testing
 
 This widget can be run from Cloud9 by launching the nodetestserver.js Test Web 
 Server by right-clicking the file and choosing "Run" and then navigating to the 
