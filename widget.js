@@ -1,0 +1,1 @@
+// Javascript for ChiliPeppr Widget
