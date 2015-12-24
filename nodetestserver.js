@@ -2,6 +2,7 @@ var http = require('http'),
     url = require('url'),
     path = require('path'),
     fs = require('fs');
+    
 var mimeTypes = {
     "html": "text/html",
     "jpeg": "image/jpeg",
@@ -43,6 +44,8 @@ http.createServer(function (req, res) {
      process.env.C9_USER + '/' +
      process.env.C9_PROJECT;
     
+    var giturl = getGithubUrl();
+    
     res.end(
       '<html><body>' +
       'Your ChiliPeppr Widget can be tested at ' +
@@ -51,9 +54,13 @@ http.createServer(function (req, res) {
       'Your ChiliPeppr Widget can be edited at ' +
       '<a href="' + editUrl + '">' +
       editUrl + '</a><br><br>\n\n' + 
-    'C9_PROJECT: ' + process.env.C9_PROJECT + '<br>\n' +
-    'C9_USER: ' + process.env.C9_USER + '\n' +
-    '');
+      'Your ChiliPeppr Widget Github Url for forking ' +
+      '<a href="' + giturl + '">' +
+      giturl + '</a><br><br>\n\n' + 
+      'C9_PROJECT: ' + process.env.C9_PROJECT + '<br>\n' +
+      'C9_USER: ' + process.env.C9_USER + '\n' +
+      ''
+    );
     
   } else if (stats.isDirectory()) {
     // path exists, is a directory
@@ -71,3 +78,15 @@ http.createServer(function (req, res) {
   
   
 }).listen(process.env.PORT);
+
+var getGithubUrl = function(callback) {
+  // read the git repo meta data to figure this out
+  var url = "";
+  var data = fs.readFileSync(".git/FETCH_HEAD").toString();
+  console.log("git url:", data);
+  var re = /.*github.com:/;
+  var url = data.replace(re, "");
+  url = "http://github.com/" + url;
+  console.log("final url:", url);
+  return url;
+}
