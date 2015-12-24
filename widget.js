@@ -9190,7 +9190,7 @@ cpdefine("inline:com-chilipeppr-widget-eagle", ["chilipeppr_ready", "Clipper", "
                 mesh.position.set(0, 0, -0.00001);
 
                 // on layers other than top, we have to possibly apply a rotation/flip
-                debugger;
+                //debugger;
                 if (layer == "Bottom") {
                     // flip in Y axis
                     var mS = (new THREE.Matrix4()).identity();
@@ -10699,12 +10699,12 @@ EagleCanvas.prototype.loadURL = function(url, cb) {
     this.url = url;
     var request = new XMLHttpRequest(),
         self = this;
-        // rewrite www.chilipeppr.com url's to i2dcui.appspot.com so we support SSL
-        this.url = this.url.replace(/http\:\/\/www.chilipeppr.com/, "//i2dcui.appspot.com");
-        this.url = this.url.replace(/http\:\/\/chilipeppr.com/, "//i2dcui.appspot.com");
-        this.url = this.url.replace(/\/\/www.chilipeppr.com/, "//i2dcui.appspot.com");
-        this.url = this.url.replace(/\/\/chilipeppr.com/, "//i2dcui.appspot.com");
-        
+    // rewrite www.chilipeppr.com url's to i2dcui.appspot.com so we support SSL
+    this.url = this.url.replace(/http\:\/\/www.chilipeppr.com/, "//i2dcui.appspot.com");
+    this.url = this.url.replace(/http\:\/\/chilipeppr.com/, "//i2dcui.appspot.com");
+    this.url = this.url.replace(/\/\/www.chilipeppr.com/, "//i2dcui.appspot.com");
+    this.url = this.url.replace(/\/\/chilipeppr.com/, "//i2dcui.appspot.com");
+
     request.open('GET', this.url, true);
     request.onreadystatechange = function() {
         if (request.readyState == 4) {
