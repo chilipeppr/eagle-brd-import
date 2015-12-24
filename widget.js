@@ -8896,7 +8896,6 @@ cpdefine("inline:com-chilipeppr-widget-eagle", ["chilipeppr_ready", "Clipper", "
                 var mesh = this.createClipperPathsAsMesh(sol_pathsOuter, tempColor, this.opacitySignal, sol_pathsHoles);
                 // slide signal wire down a tinge on z
                 // to make rendering prettier
-<<<<<<< HEAD
                 mesh.position.set(0, 0, -0.00001);
 
                 // on layers other than top, we have to possibly apply a rotation/flip
@@ -8914,9 +8913,7 @@ cpdefine("inline:com-chilipeppr-widget-eagle", ["chilipeppr_ready", "Clipper", "
 
                 // FINALLY. AFTER ALL THAT WORK. LETS ACTUALLY SHOW THE DARN USER THE
                 // BEAUTIFUL 3D OBJECTS WE CREATED
-=======
                 mesh.position.set(0,0,-0.00001);
->>>>>>> 20a22c4dfd7790b2649c70f633fc3d92eab22e45
                 this.sceneAdd(mesh);
                 
                 // add userData for intersect
@@ -10423,15 +10420,12 @@ EagleCanvas.prototype.loadURL = function (url, cb) {
     this.url = url;
     var request = new XMLHttpRequest(),
         self = this;
-<<<<<<< HEAD
     // rewrite www.chilipeppr.com url's to i2dcui.appspot.com so we support SSL
     this.url = this.url.replace(/http\:\/\/www.chilipeppr.com/, "//i2dcui.appspot.com");
     this.url = this.url.replace(/http\:\/\/chilipeppr.com/, "//i2dcui.appspot.com");
     this.url = this.url.replace(/\/\/www.chilipeppr.com/, "//i2dcui.appspot.com");
     this.url = this.url.replace(/\/\/chilipeppr.com/, "//i2dcui.appspot.com");
 
-=======
->>>>>>> 20a22c4dfd7790b2649c70f633fc3d92eab22e45
     request.open('GET', this.url, true);
     request.onreadystatechange = function () {
         if (request.readyState == 4) {
