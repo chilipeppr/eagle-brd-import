@@ -50,9 +50,6 @@ http.createServer(function(req, res) {
 
     res.end(html);
 
-    generateInlinedFile();
-    pushToGithub();
-
   }
   else if (stats.isDirectory()) {
     // path exists, is a directory
@@ -144,8 +141,13 @@ var getMainPage = function() {
     giturl + '</a><br><br>\n\n' +
     'C9_PROJECT: ' + process.env.C9_PROJECT + '<br>\n' +
     'C9_USER: ' + process.env.C9_USER + '\n' +
-    '<br><br>Just updated your auto-generated-widget.html file.' +
     '';
+
+    generateInlinedFile();
+    html += '<br><br>Just updated your auto-generated-widget.html file.';
+    
+    pushToGithub();
+    html += '<br><br>Just pushed updates to your Github repo.';
 
   return html;
 }
