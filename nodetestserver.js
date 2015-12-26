@@ -87,7 +87,7 @@ var evalWidgetJs = function() {
 
 // create our own version of cpdefine so we can use the evalWidgetJs above
 cpdefine = function(id, deps, callback) {
-  console.log("cool, our own cpdefine got called. id:", id, "deps:", deps, "callback:", callback);
+  console.log("cool, our own cpdefine got called. id:", id, "deps:", deps);
 }
 // define other top-level methods just to avoid errors
 requirejs = function() {}
