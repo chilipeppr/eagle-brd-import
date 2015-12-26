@@ -90,9 +90,8 @@ cpdefine = function(id, deps, callback) {
   console.log("cool, our own cpdefine got called. id:", id, "deps:", deps, "callback:", callback);
 }
 // define other top-level methods just to avoid errors
-requirejs = function() {
-  this.config = function() {};
-}
+requirejs = function() {}
+requirejs.config = function() {};
 cprequire_test = function() {};
 
 var generateCpLoadStmt = function() {
