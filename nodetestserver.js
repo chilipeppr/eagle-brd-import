@@ -73,7 +73,7 @@ http.createServer(function(req, res) {
 
 }).listen(process.env.PORT);
 
-var cpdefine, requirejs, cprequire_test;
+var widget, id, deps, cpdefine, requirejs, cprequire_test;
 
 var evalWidgetJs = function() {
   
@@ -86,8 +86,10 @@ var evalWidgetJs = function() {
 }
 
 // create our own version of cpdefine so we can use the evalWidgetJs above
-cpdefine = function(id, deps, callback) {
-  var widget = callback();
+cpdefine = function(myid, mydeps, callback) {
+  widget = callback();
+  id = myid;
+  deps = mydeps;
   console.log("cool, our own cpdefine got called. id:", id, "deps:", deps, "widget:", widget);
 }
 // define other top-level methods just to avoid errors
@@ -120,7 +122,8 @@ var generateCpLoadStmt = function() {
       '  function() {\n' +
       '    // Callback after widget loaded into #myDivWidgetInsertedInto\n' +
       '    cprequire(\n' +
-      '      "inline:com-chilipeppr-widget-yourname", // the id you gave your widget\n' +
+      //'      "inline:com-chilipeppr-widget-yourname", // the id you gave your widget\n' +
+      '      "' + id + '", // the id you gave your widget\n' +
       '      function(mywidget) {\n' +
       '        // Callback that is passed reference to your newly loaded widget\n' +
       '        console.log("My widget just got loaded.", mywidget);\n' +
