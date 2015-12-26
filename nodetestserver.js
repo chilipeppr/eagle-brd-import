@@ -73,6 +73,19 @@ http.createServer(function(req, res) {
 
 }).listen(process.env.PORT);
 
+var generateCpLoadStmt = function() {
+  var url = getGithubUrl();
+  if (url != null) {
+    
+    // since we have a github url, use the raw version
+    var rawurl = "";
+    
+    var js = 'chilipeppr.load("#myDivWidgetInsertedInto",\n' +
+      '  "' + url + '",\n' +
+      '';
+  }
+}
+
 var pushToGithub = function() {
   var exec = require('child_process').execFile;
   var cmd = './git-push.sh';
@@ -153,13 +166,22 @@ var getMainPage = function() {
 }
 
 var getGithubUrl = function(callback) {
+
   // read the git repo meta data to figure this out
   var url = "";
-  var data = fs.readFileSync(".git/FETCH_HEAD").toString();
-  //console.log("git url:", data);
-  var re = /.*github.com:/;
-  var url = data.replace(re, "");
-  url = "http://github.com/" + url;
-  //console.log("final url:", url);
-  return url;
+  var path = ".git/FETCH_HEAD";
+
+  if (fs.existsSync(path)) {
+    var data = fs.readFileSync(path).toString();
+    //console.log("git url:", data);
+    var re = /.*github.com:/;
+    var url = data.replace(re, "");
+    url = "http://github.com/" + url;
+    //console.log("final url:", url);
+    return url;
+  }
+  else {
+    return null;
+  }
+
 }
