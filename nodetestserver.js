@@ -74,16 +74,45 @@ http.createServer(function(req, res) {
 }).listen(process.env.PORT);
 
 var generateCpLoadStmt = function() {
+  
+  // see if we have a backing github url
+  // if we do, use it for the chilipeppr.load()
+  // if not, we'll have to use the preview url from cloud9
   var url = getGithubUrl();
+  
+  var js = "";
+  
   if (url != null) {
     
     // since we have a github url, use the raw version
-    var rawurl = "";
+    // wa want something like https://raw.githubusercontent.com/chilipeppr/eagle-brd-import/master/auto-generated-widget.html";
+    var rawurl = url.replace(/\/github.com\//i, "/raw.githubusercontent.com/");
+    rawurl += '/master/auto-generated-widget.html';
     
-    var js = 'chilipeppr.load("#myDivWidgetInsertedInto",\n' +
-      '  "' + url + '",\n' +
+    js = 'chilipeppr.load(\n' +
+      '  "#myDivWidgetInsertedInto",\n' +
+      '  "' + rawurl + '",\n' +
+      '  function() {\n' +
+      '    // Callback after widget loaded into #myDivWidgetInsertedInto\n' +
+      '    cprequire(\n' +
+      '      "inline:com-chilipeppr-widget-yourname", // the id you gave your widget\n' +
+      '      function(mywidget) {\n' +
+      '        // Callback that is passed reference to your newly loaded widget\n' +
+      '        console.log("My widget just got loaded.", mywidget);\n' +
+      '        mywidget.init();\n' +
+      '      }\n' +
+      '    );\n' +
+      '  }\n' +
+      ');\n' +
       '';
+      
+  } else {
+    // use preview url from cloud 9.
+    // TODO
+    js = "No Github backing URL. Not implemented yet.";
   }
+  
+  return js;
 }
 
 var pushToGithub = function() {
@@ -156,11 +185,16 @@ var getMainPage = function() {
     'C9_USER: ' + process.env.C9_USER + '\n' +
     '';
 
-    generateInlinedFile();
-    html += '<br><br>Just updated your auto-generated-widget.html file.';
+  generateInlinedFile();
+  html += '<br><br>Just updated your auto-generated-widget.html file.';
     
-    pushToGithub();
-    html += '<br><br>Just pushed updates to your Github repo.';
+  pushToGithub();
+  html += '<br><br>Just pushed updates to your Github repo.';
+  
+  var jsLoad = generateCpLoadStmt();
+  html += '<br><br><pre>\n' +
+    jsLoad +
+    '</pre>\n';
 
   return html;
 }
