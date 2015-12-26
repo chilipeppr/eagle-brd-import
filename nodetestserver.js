@@ -208,7 +208,7 @@ var getGithubUrl = function(callback) {
   if (fs.existsSync(path)) {
     var data = fs.readFileSync(path).toString();
     //console.log("git url:", data);
-    data = data.replace(/[\s\r\n]/, "");
+    data = data.replace(/[\r\n]/g, "");
     var re = /.*github.com:/;
     var url = data.replace(re, "");
     url = "http://github.com/" + url;
