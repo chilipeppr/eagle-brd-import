@@ -75,9 +75,12 @@ cpdefine("inline:com-chilipeppr-widget-eagle", ["chilipeppr_ready", "Clipper", "
         fiddleurl: "http://jsfiddle.net/chilipeppr/3fe23xsr/",
         name: "Widget / Eagle PCB v3",
         desc: "This widget lets you drag in an Eagle PCB \".brd\" file to mill.",
-        publish: {},
+        publish: { 
+            '/onGenerate': 'When we go to generate gcode'
+            
+        },
         subscribe: {
-
+            '/asdf' : 'qwer'
         },
         foreignPublish: {},
         foreignSubscribe: {
@@ -10918,7 +10921,7 @@ EagleCanvas.prototype.drawPads = function (ctx, color) {
     var that = this;
     $.each(this.packagesByName, function (key, obj) {
         //console.log("pkg. obj:", obj, "key:", key);
-        var package = that.packagesByName[key];
+        //var package = that.packagesByName[key];
         //console.log("package:", package);
         $.each(obj.pads, function (indx, pad) {
             console.log("pad:", pad);
