@@ -89,6 +89,9 @@ var cpdefine = function(id, deps, callback) {
 
 var generateCpLoadStmt = function() {
   
+  // eval the widget.js so we have lots of data on it
+  evalWidgetJs();
+  
   // see if we have a backing github url
   // if we do, use it for the chilipeppr.load()
   // if not, we'll have to use the preview url from cloud9
