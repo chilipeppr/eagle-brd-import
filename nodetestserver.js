@@ -73,6 +73,20 @@ http.createServer(function(req, res) {
 
 }).listen(process.env.PORT);
 
+var evalWidgetJs = function() {
+  
+  // This method reads in your widget.js and evals it to
+  // figure out all the info from it to generate docs and sample
+  // code to make your life easy
+  eval(fs.readFileSync('widget.js')+'');
+  
+}
+
+// create our own version of cpdefine so we can use the evalWidgetJs above
+var cpdefine = function(id, deps, callback) {
+  console.log("cool, our own cpdefine got called. id:", id, "deps:", deps, "callback:", callback);
+}
+
 var generateCpLoadStmt = function() {
   
   // see if we have a backing github url
