@@ -79,6 +79,7 @@ var evalWidgetJs = function() {
   // figure out all the info from it to generate docs and sample
   // code to make your life easy
   eval(fs.readFileSync('widget.js')+'');
+  console.log("evaled the widget.js");
   
 }
 
