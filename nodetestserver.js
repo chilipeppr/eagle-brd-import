@@ -73,6 +73,8 @@ http.createServer(function(req, res) {
 
 }).listen(process.env.PORT);
 
+var cpdefine, requirejs, cprequire_test;
+
 var evalWidgetJs = function() {
   
   // This method reads in your widget.js and evals it to
@@ -84,9 +86,14 @@ var evalWidgetJs = function() {
 }
 
 // create our own version of cpdefine so we can use the evalWidgetJs above
-var cpdefine = function(id, deps, callback) {
+cpdefine = function(id, deps, callback) {
   console.log("cool, our own cpdefine got called. id:", id, "deps:", deps, "callback:", callback);
 }
+// define other top-level methods just to avoid errors
+requirejs = function() {
+  this.config = function() {};
+}
+cprequire_test = function() {};
 
 var generateCpLoadStmt = function() {
   
